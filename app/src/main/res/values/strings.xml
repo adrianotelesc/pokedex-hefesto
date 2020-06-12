@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Pokédex</string>
+    <string name="location">Localização</string>
+    <string name="done">Pronto</string>
+    <string name="name">Nome</string>
+    <string name="weight">Peso</string>
+    <string name="height">Altura</string>
+    <string name="pokemon_number_format">#%03d</string>
+    <string name="empty_message">Nada além de rastros por aqui…</string>
 </resources>

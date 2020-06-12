@@ -1,12 +1,11 @@
 package com.hefesto.pokedex
 
-import android.annotation.SuppressLint
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_main.*
@@ -56,7 +55,7 @@ class MainActivity : AppCompatActivity() {
         shouldDisplayEmptyView(pokemons.isEmpty())
     }
 
-    fun shouldDisplayEmptyView(isEmpty: Boolean) {
+    private fun shouldDisplayEmptyView(isEmpty: Boolean) {
         emptyView.visibility = if (isEmpty) View.VISIBLE else View.GONE
     }
 
@@ -75,15 +74,15 @@ class MainActivity : AppCompatActivity() {
 
         override fun getItemCount() = pokemons.size
 
-        @SuppressLint("SetTextI18n")
         override fun onBindViewHolder(holder: PokemonViewHolder, position: Int) {
-            holder.itemView.tvPokemonName.text = pokemons[position].name
-            holder.itemView.tvPokemonNumber.text = "#%03d".format(pokemons[position].number)
-            Picasso.get().load(pokemons[position].imageUrl).into(holder.itemView.ivPokemonImage)
+            holder.itemView.tvName.text = pokemons[position].name
+            holder.itemView.tvNumber.text = holder.itemView.tvNumber.context.getString(R.string.pokemon_number_format).format(pokemons[position].number)
+            Picasso.get().load(pokemons[position].imageUrl).into(holder.itemView.ivImage)
 
             holder.itemView.setOnClickListener {
                 onItemClick(pokemons[position])
             }
         }
     }
+
 }

@@ -1,9 +1,163 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fillViewport="true"
     tools:context=".PokemonDetailActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context=".PokemonDetailActivity">
+
+        <TextView
+            android:id="@+id/tvName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:textColor="@android:color/black"
+            android:textSize="32sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@id/guideStart"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Pikachu" />
+
+        <TextView
+            android:id="@+id/tvFirstType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/bg_rounded"
+            android:paddingStart="16dp"
+            android:paddingTop="4dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="4dp"
+            android:textColor="@android:color/black"
+            app:layout_constraintStart_toStartOf="@id/tvName"
+            app:layout_constraintTop_toBottomOf="@id/tvName"
+            tools:text="Eletric" />
+
+        <TextView
+            android:id="@+id/tvSecondType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/bg_rounded"
+            android:paddingStart="16dp"
+            android:paddingTop="4dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="4dp"
+            android:textColor="@android:color/black"
+            app:layout_constraintStart_toEndOf="@id/tvFirstType"
+            app:layout_constraintTop_toTopOf="@id/tvFirstType"
+            tools:text="Fire" />
+
+        <TextView
+            android:id="@+id/tvHeightLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/height"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="@id/tvFirstType"
+            app:layout_constraintTop_toBottomOf="@id/tvFirstType" />
+
+        <TextView
+            android:id="@+id/tvHeight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:textColor="@android:color/black"
+            android:textSize="22sp"
+            app:layout_constraintStart_toStartOf="@id/tvHeightLabel"
+            app:layout_constraintTop_toBottomOf="@id/tvHeightLabel"
+            tools:text="0.40 cm" />
+
+        <TextView
+            android:id="@+id/tvWeightLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/weight"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="@id/tvHeight"
+            app:layout_constraintTop_toBottomOf="@id/tvHeight" />
+
+        <TextView
+            android:id="@+id/tvWeight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:textColor="@android:color/black"
+            android:textSize="22sp"
+            app:layout_constraintStart_toStartOf="@id/tvWeightLabel"
+            app:layout_constraintTop_toBottomOf="@id/tvWeightLabel"
+            tools:text="6.0 kg" />
+
+        <ImageView
+            android:id="@+id/ivImage"
+            android:layout_width="222dp"
+            android:layout_height="222dp"
+            android:layout_marginEnd="24dp"
+            app:layout_constraintBottom_toBottomOf="@id/tvWeight"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tvHeightLabel"
+            app:layout_constraintVertical_bias="0.0"
+            tools:ignore="ContentDescription"
+            tools:srcCompat="@tools:sample/avatars" />
+
+        <TextView
+            android:id="@+id/tvNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/tvFirstType"
+            app:layout_constraintEnd_toEndOf="@id/guideEnd"
+            app:layout_constraintTop_toTopOf="@id/tvName"
+            tools:text="#025" />
+
+<!--        <TextView-->
+<!--            android:id="@+id/tvLocationLabel"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="8dp"-->
+<!--            android:text="@string/ic_marker"-->
+<!--            android:textColor="@android:color/black"-->
+<!--            android:textSize="18sp"-->
+<!--            android:textStyle="bold"-->
+<!--            app:layout_constraintStart_toStartOf="@id/tvWeight"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/ivImage" />-->
+
+<!--        <fragment-->
+<!--            android:id="@+id/mapFragment"-->
+<!--            android:name="com.google.android.gms.maps.SupportMapFragment"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="312dp"-->
+<!--            android:layout_marginTop="8dp"-->
+<!--            android:layout_marginBottom="24dp"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="@id/guideEnd"-->
+<!--            app:layout_constraintStart_toStartOf="@id/guideStart"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/tvLocationLabel" />-->
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideStart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="24dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideEnd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="24dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".AddPokemonActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity
             android:name=".PokemonDetailActivity"
             android:parentActivityName=".MainActivity" />
         <activity
