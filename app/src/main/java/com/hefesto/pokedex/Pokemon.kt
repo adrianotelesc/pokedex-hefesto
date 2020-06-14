@@ -11,6 +11,6 @@ data class Pokemon(
     val imageUrl: String,
     val weight: Float,
     val height: Float,
-    val latitude: Double,
-    val longitude: Double
+    var latitude: Double,
+    var longitude: Double
 ) : Parcelable
