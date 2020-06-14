@@ -1,9 +1,11 @@
-package com.hefesto.pokedex
+package com.hefesto.pokedex.ui
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.hefesto.pokedex.R
+import com.hefesto.pokedex.data.Pokemon
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.list_item_pokemon.view.*
 
@@ -24,7 +26,9 @@ class PokemonAdapter(
 
     override fun onBindViewHolder(holder: PokemonViewHolder, position: Int) {
         holder.itemView.tvName.text = pokemons[position].name
-        holder.itemView.tvNumber.text = holder.itemView.tvNumber.context.getString(R.string.pokemon_number_format).format(pokemons[position].number)
+        holder.itemView.tvNumber.text = holder.itemView.tvNumber.context.getString(
+            R.string.pokemon_number_format
+        ).format(pokemons[position].number)
         Picasso.get().load(pokemons[position].imageUrl).into(holder.itemView.ivImage)
 
         holder.itemView.setOnClickListener {

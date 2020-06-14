@@ -1,4 +1,4 @@
-package com.hefesto.pokedex
+package com.hefesto.pokedex.data
 
 import com.google.gson.GsonBuilder
 import retrofit2.Call
@@ -15,7 +15,10 @@ interface PokeApi {
         val INSTANCE: PokeApi
             get() {
                 val gson = GsonBuilder()
-                    .registerTypeAdapter(Pokemon::class.java, PokemonJsonDeserializer())
+                    .registerTypeAdapter(
+                        Pokemon::class.java,
+                        PokemonJsonDeserializer()
+                    )
                     .create()
 
                 return Retrofit.Builder()

@@ -1,4 +1,4 @@
-package com.hefesto.pokedex
+package com.hefesto.pokedex.data
 
 import com.google.gson.JsonDeserializationContext
 import com.google.gson.JsonDeserializer
@@ -18,6 +18,15 @@ class PokemonJsonDeserializer : JsonDeserializer<Pokemon> {
         val height = jsonObject?.get("height")?.asFloat ?: 0f
         val types = jsonObject?.getAsJsonArray("types")?.map { it.asJsonObject.get("type").asJsonObject.get("name").asString } ?: listOf()
         val imageUrl = jsonObject?.getAsJsonObject("sprites")?.get("front_default")?.asString ?: ""
-        return Pokemon(name, number, types, imageUrl, weight, height, 0.0, 0.0)
+        return Pokemon(
+            name,
+            number,
+            types,
+            imageUrl,
+            weight,
+            height,
+            0.0,
+            0.0
+        )
     }
 }

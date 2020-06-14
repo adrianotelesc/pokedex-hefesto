@@ -1,4 +1,4 @@
-package com.hefesto.pokedex
+package com.hefesto.pokedex.data
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize

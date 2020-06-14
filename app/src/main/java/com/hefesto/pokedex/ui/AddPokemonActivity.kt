@@ -1,4 +1,4 @@
-package com.hefesto.pokedex
+package com.hefesto.pokedex.ui
 
 import android.app.Activity
 import android.content.Intent
@@ -8,6 +8,9 @@ import android.widget.Toast
 import com.google.android.libraries.places.api.model.Place
 import com.google.android.libraries.places.widget.Autocomplete
 import com.google.android.libraries.places.widget.model.AutocompleteActivityMode
+import com.hefesto.pokedex.R
+import com.hefesto.pokedex.data.PokeApi
+import com.hefesto.pokedex.data.Pokemon
 import kotlinx.android.synthetic.main.activity_add_pokemon.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -55,7 +58,9 @@ class AddPokemonActivity : AppCompatActivity() {
             val fields = listOf(Place.Field.ADDRESS, Place.Field.LAT_LNG)
             val intent =
                 Autocomplete.IntentBuilder(AutocompleteActivityMode.FULLSCREEN, fields).build(this)
-            startActivityForResult(intent, AUTOCOMPLETE_REQUEST_CODE)
+            startActivityForResult(intent,
+                AUTOCOMPLETE_REQUEST_CODE
+            )
         }
     }
 

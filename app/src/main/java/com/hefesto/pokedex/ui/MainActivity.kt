@@ -1,17 +1,15 @@
-package com.hefesto.pokedex
+package com.hefesto.pokedex.ui
 
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.RecyclerView
 import com.google.android.libraries.places.api.Places
-import com.squareup.picasso.Picasso
+import com.hefesto.pokedex.BuildConfig
+import com.hefesto.pokedex.R
+import com.hefesto.pokedex.data.Pokemon
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.list_item_pokemon.view.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -53,19 +51,29 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        Places.initialize(applicationContext, BuildConfig.GOOGLE_API_KEY)
+        Places.initialize(applicationContext,
+            BuildConfig.GOOGLE_API_KEY
+        )
         setUpRecyclerView()
         fabAddPokemon.setOnClickListener {
             val intent = Intent(this, AddPokemonActivity::class.java)
-            startActivityForResult(intent, ADD_POKEMON_REQUEST_CODE)
+            startActivityForResult(intent,
+                ADD_POKEMON_REQUEST_CODE
+            )
         }
         shouldDisplayEmptyView(pokemons.isEmpty())
     }
 
     private fun setUpRecyclerView() {
         adapter = PokemonAdapter(pokemons) {
-            val intent = Intent(this, PokemonDetailActivity::class.java).apply {
-                putExtra(PokemonDetailActivity.POKEMON_EXTRA, it)
+            val intent = Intent(
+                this,
+                PokemonDetailActivity::class.java
+            ).apply {
+                putExtra(
+                    PokemonDetailActivity.POKEMON_EXTRA,
+                    it
+                )
             }
             startActivity(intent)
         }

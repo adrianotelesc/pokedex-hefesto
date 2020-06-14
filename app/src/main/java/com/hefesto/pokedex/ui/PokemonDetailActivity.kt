@@ -1,4 +1,4 @@
-package com.hefesto.pokedex
+package com.hefesto.pokedex.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -8,6 +8,8 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import com.hefesto.pokedex.R
+import com.hefesto.pokedex.data.Pokemon
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_pokemon_detail.*
 
