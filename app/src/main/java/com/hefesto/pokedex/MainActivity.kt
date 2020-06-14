@@ -13,6 +13,8 @@ import kotlinx.android.synthetic.main.list_item_pokemon.view.*
 
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var adapter: PokemonAdapter
+
     private var pokemons: List<Pokemon> = listOf(
         Pokemon(
             "Pikachu",
@@ -49,10 +51,18 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        rvPokemons.adapter = PokemonAdapter(pokemons) {
-            startActivity(Intent(this, PokemonDetailActivity::class.java))
-        }
+        setUpRecyclerView()
         shouldDisplayEmptyView(pokemons.isEmpty())
+    }
+
+    private fun setUpRecyclerView() {
+        adapter = PokemonAdapter(pokemons) {
+            val intent = Intent(this, PokemonDetailActivity::class.java).apply {
+                putExtra(PokemonDetailActivity.POKEMON_EXTRA, it)
+            }
+            startActivity(intent)
+        }
+        rvPokemons.adapter = adapter
     }
 
     private fun shouldDisplayEmptyView(isEmpty: Boolean) {

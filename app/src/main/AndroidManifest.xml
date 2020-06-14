@@ -11,11 +11,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="$googleApiKey" />
         <activity
             android:name=".AddPokemonActivity"
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".PokemonDetailActivity"
+            android:label="@string/pokemon_detail_title"
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".MainActivity"

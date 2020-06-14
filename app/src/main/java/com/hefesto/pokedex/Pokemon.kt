@@ -1,5 +1,9 @@
 package com.hefesto.pokedex
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
 data class Pokemon(
     val name: String,
     val number: Int,
@@ -9,4 +13,4 @@ data class Pokemon(
     val height: Float,
     val latitude: Double,
     val longitude: Double
-)
+) : Parcelable
