@@ -15,10 +15,7 @@ interface PokeApi {
         val INSTANCE: PokeApi
             get() {
                 val gson = GsonBuilder()
-                    .registerTypeAdapter(
-                        Pokemon::class.java,
-                        PokemonJsonDeserializer()
-                    )
+                    .registerTypeAdapter(Pokemon::class.java, PokemonJsonDeserializer())
                     .create()
 
                 return Retrofit.Builder()

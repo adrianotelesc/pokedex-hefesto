@@ -13,85 +13,57 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var adapter: PokemonAdapter
+    private val pokemons: MutableList<Pokemon> = mutableListOf()
 
-    private var pokemons: MutableList<Pokemon> = mutableListOf(
-        Pokemon(
-            "Pikachu",
-            25,
-            listOf("Eletric"),
-            "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png",
-            6f,
-            4f,
-            -3.1028263,
-            -60.0147652
-        ),
-        Pokemon(
-            "Squirtle",
-            7,
-            listOf("Water"),
-            "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/7.png",
-            8.5f,
-            6f,
-            -1.9928572,
-            -60.0552653
-        ),
-        Pokemon(
-            "Charmander",
-            4,
-            listOf("Fire"),
-            "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png",
-            9f,
-            6f,
-            -3.091583,
-            -60.0198707
-        )
-    )
+    private var adapter: PokemonAdapter = PokemonAdapter(pokemons) {
+        Intent(this, PokemonDetailActivity::class.java).apply {
+            putExtra(PokemonDetailActivity.POKEMON_EXTRA, it)
+        }.also { startActivity(it) }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        Places.initialize(applicationContext,
-            BuildConfig.GOOGLE_API_KEY
-        )
-        setUpRecyclerView()
-        fabAddPokemon.setOnClickListener {
-            val intent = Intent(this, AddPokemonActivity::class.java)
-            startActivityForResult(intent,
-                ADD_POKEMON_REQUEST_CODE
-            )
-        }
-        shouldDisplayEmptyView(pokemons.isEmpty())
+
+        Places.initialize(applicationContext, BuildConfig.GOOGLE_API_KEY)
+
+        setUpPokemonListWithRecyclerView()
+        setUpAddPokemonButtonClick()
+
+        shouldDisplayEmptyView()
     }
 
-    private fun setUpRecyclerView() {
-        adapter = PokemonAdapter(pokemons) {
-            val intent = Intent(
-                this,
-                PokemonDetailActivity::class.java
-            ).apply {
-                putExtra(
-                    PokemonDetailActivity.POKEMON_EXTRA,
-                    it
-                )
-            }
-            startActivity(intent)
-        }
+    private fun setUpPokemonListWithRecyclerView() {
         rvPokemons.adapter = adapter
     }
 
-    private fun shouldDisplayEmptyView(isEmpty: Boolean) {
-        emptyView.visibility = if (isEmpty) View.VISIBLE else View.GONE
+    private fun setUpAddPokemonButtonClick() {
+        fabAddPokemon.setOnClickListener { startAddPokemonActivityForNewPokemon() }
+    }
+
+    private fun startAddPokemonActivityForNewPokemon() {
+        Intent(this, AddPokemonActivity::class.java).also {
+            startActivityForResult(it, ADD_POKEMON_REQUEST_CODE)
+        }
+    }
+
+    private fun shouldDisplayEmptyView() {
+        emptyView.visibility = if (pokemons.isEmpty()) View.VISIBLE else View.GONE
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == ADD_POKEMON_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
-            data?.getParcelableExtra<Pokemon>(AddPokemonActivity.ADD_POKEMON_EXTRA)?.let {
-                pokemons.add(it)
-                adapter.notifyDataSetChanged()
+            data?.getParcelableExtra<Pokemon>(AddPokemonActivity.POKEMON_EXTRA)?.let {
+                appendNewPokemonToRecyclerView(it)
             }
         }
+    }
+
+    private fun appendNewPokemonToRecyclerView(pokemon: Pokemon) {
+        pokemons.add(pokemon)
+        adapter.notifyItemInserted(pokemons.size - 1)
+        shouldDisplayEmptyView()
     }
 
     companion object {
