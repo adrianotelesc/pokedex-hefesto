@@ -29,7 +29,7 @@ class PokemonDetailActivity : AppCompatActivity() {
 
             bindTextViewsToPokemonTypes(it)
 
-            tvWeight.text = getString(R.string.weight_format).format(it.weight)
+            tvWeight.text = getString(R.string.weight_format).format(it.weight / 10)
 
             tvHeight.text = getString(R.string.height_format).format(it.height / 10)
 

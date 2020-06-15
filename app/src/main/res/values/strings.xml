@@ -8,7 +8,7 @@
     <string name="pokemon_number_format">#%03d</string>
     <string name="empty_message">Nada além de rastros por aqui…</string>
     <string name="pokemon_detail_title">Detalhes do pokémon</string>
-    <string name="height_format">%.2f cm</string>
+    <string name="height_format">%.1f m</string>
     <string name="weight_format">%.1f kg</string>
     <string name="invalid_fields_message">Campos inválidos!</string>
     <string name="error_message">Algo de errado não está certo...</string>
