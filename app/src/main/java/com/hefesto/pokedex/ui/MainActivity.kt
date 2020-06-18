@@ -1,6 +1,5 @@
 package com.hefesto.pokedex.ui
 
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -8,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.android.libraries.places.api.Places
 import com.hefesto.pokedex.BuildConfig
 import com.hefesto.pokedex.R
+import com.hefesto.pokedex.data.AppDatabase
 import com.hefesto.pokedex.data.Pokemon
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -51,18 +51,16 @@ class MainActivity : AppCompatActivity() {
         emptyView.visibility = if (pokemons.isEmpty()) View.VISIBLE else View.GONE
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == ADD_POKEMON_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
-            data?.getParcelableExtra<Pokemon>(AddPokemonActivity.POKEMON_EXTRA)?.let {
-                appendNewPokemonToRecyclerView(it)
-            }
-        }
+    override fun onResume() {
+        super.onResume()
+        val updatedPokemonList = AppDatabase.getInstance(this).pokemonDao.selectAll()
+        updateRecyclerView(updatedPokemonList)
     }
 
-    private fun appendNewPokemonToRecyclerView(pokemon: Pokemon) {
-        pokemons.add(pokemon)
-        adapter.notifyItemInserted(pokemons.size - 1)
+    private fun updateRecyclerView(updatedPokemonList: List<Pokemon>) {
+        pokemons.clear()
+        pokemons.addAll(updatedPokemonList)
+        adapter.notifyDataSetChanged()
         shouldDisplayEmptyView()
     }
 

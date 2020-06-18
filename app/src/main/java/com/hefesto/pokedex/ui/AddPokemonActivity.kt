@@ -8,6 +8,7 @@ import com.google.android.libraries.places.api.model.Place
 import com.google.android.libraries.places.widget.Autocomplete
 import com.google.android.libraries.places.widget.model.AutocompleteActivityMode
 import com.hefesto.pokedex.R
+import com.hefesto.pokedex.data.AppDatabase
 import com.hefesto.pokedex.data.PokeApi
 import com.hefesto.pokedex.data.Pokemon
 import com.hefesto.pokedex.isFilled
@@ -46,7 +47,14 @@ class AddPokemonActivity : AppCompatActivity() {
                 val name = edtNameInput.text.toString().toLowerCase(Locale.getDefault())
                 fetchPokemonByName(
                     name,
-                    onSuccess = { returnPokemonAsActivityResult(it) },
+                    onSuccess = {
+                        val pokemonWithLocation = it.apply {
+                            latitude = selectedPlace.latLng?.latitude ?: 0.0
+                            longitude = selectedPlace.latLng?.longitude ?: 0.0
+                        }
+                        AppDatabase.getInstance(this).pokemonDao.insert(pokemonWithLocation)
+                        finish()
+                    },
                     onError = { shortToast(R.string.error_message) }
                 )
             } else {
@@ -74,19 +82,6 @@ class AddPokemonActivity : AppCompatActivity() {
                 }
             }
         })
-    }
-
-    private fun returnPokemonAsActivityResult(pokemon: Pokemon) {
-        val pokemonWithLocation = pokemon.apply {
-            latitude = selectedPlace.latLng?.latitude ?: 0.0
-            longitude = selectedPlace.latLng?.longitude ?: 0.0
-        }
-        Intent().apply {
-            putExtra(POKEMON_EXTRA, pokemonWithLocation)
-        }.also {
-            setResult(Activity.RESULT_OK, it)
-        }
-        finish()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

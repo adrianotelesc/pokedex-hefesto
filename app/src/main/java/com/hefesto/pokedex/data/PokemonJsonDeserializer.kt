@@ -19,6 +19,7 @@ class PokemonJsonDeserializer : JsonDeserializer<Pokemon> {
         val types = jsonObject?.getAsJsonArray("types")?.map { it.asJsonObject.get("type").asJsonObject.get("name").asString } ?: listOf()
         val imageUrl = jsonObject?.getAsJsonObject("sprites")?.get("front_default")?.asString ?: ""
         return Pokemon(
+            0,
             name,
             number,
             types,
