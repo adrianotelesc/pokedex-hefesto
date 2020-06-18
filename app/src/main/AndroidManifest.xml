@@ -16,6 +16,7 @@
             android:value="$googleApiKey" />
         <activity
             android:name=".ui.AddPokemonActivity"
+            android:label="@string/add_pokemon_title"
             android:parentActivityName=".ui.MainActivity" />
         <activity
             android:name=".ui.PokemonDetailActivity"

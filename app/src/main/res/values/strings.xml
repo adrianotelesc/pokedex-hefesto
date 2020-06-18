@@ -12,4 +12,5 @@
     <string name="weight_format">%.1f kg</string>
     <string name="invalid_fields_message">Campos inválidos!</string>
     <string name="error_message">Algo de errado não está certo...</string>
+    <string name="add_pokemon_title">Adicionar pokémon</string>
 </resources>
